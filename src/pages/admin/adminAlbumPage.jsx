@@ -9,14 +9,7 @@ export default function AdminAlbumPage(){
     const [albums, setAlbums] = useState(sampleData);
 
     useEffect(()=>{
-        const token = localStorage.getItem("token");
-
-        axios.get(import.meta.env.VITE_BACKEND_URL+"/api/albums", {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-
-        }).then((res)=>{
+        axios.get(import.meta.env.VITE_BACKEND_URL+"/api/albums").then((res)=>{
         console.log(res.data)
         setAlbums(res.data)
     })

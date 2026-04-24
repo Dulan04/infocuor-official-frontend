@@ -1,5 +1,6 @@
 import { Link, Route, Routes } from "react-router-dom";
 import AdminAlbumPage from "./admin/adminAlbumPage";
+import AddAlbum from "./admin/addAlbum";
 
 export default function AdminPage(){
     return(
@@ -18,6 +19,7 @@ export default function AdminPage(){
                     <Route path="/bookings" element={<h1>Booking Page</h1>}/>
                     <Route path="/users" element={<h1>Users Page</h1>}/>
                     <Route path="/reviews" element={<h1>Review Page</h1>}/>
+                    <Route path="/add-album" element={<AddAlbum/>} />
                 </Routes>
 
             </div>
