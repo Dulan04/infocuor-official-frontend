@@ -18,12 +18,12 @@ export default function AddAlbum() {
 
         if (token == null) {
             toast.error("Please login first");
-            return;
+            return
         }
 
         if (images.length <= 0) {
             toast.error("Please select at least one image");
-            return;
+            return
         }
 
         const promisesArray = [];
@@ -35,26 +35,29 @@ export default function AddAlbum() {
         try {
 
             const imageUrls = await Promise.all(promisesArray);
+            console.log(imageUrls)
 
             const album = {
-                albumId,
-                albumName,
-                description,
+                albumId : albumId,
+                albumName : albumName,
+                description : description,
                 images: imageUrls,
-                category
+                category : category
             };
+            console.log(token)
 
-            await axios.post(
-                import.meta.env.VITE_BACKEND_URL + "/api/albums",
-                album,
-                {
-                    headers: {
-                        Authorization: "Bearer " + token
-                    }
+            axios.post(import.meta.env.VITE_BACKEND_URL + "/api/albums", album, {
+                headers : {
+                    "Authorization" : "Bearer " + token
                 }
-            );
-
-            toast.success("Album added successfully");
+            }).then(
+                ()=>{
+                    toast.error("Album added successfully")
+                }
+                    
+            ).catch((e)=>{
+                    toast.error(e.response.data.message)
+                })
 
         } catch (e) {
             console.log(e);
