@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Header from "../components/header";
+import GalleryPage from "./gallery";
 
 export default function HomePage() {
   return (
@@ -8,20 +9,18 @@ export default function HomePage() {
       <div className="w-full h-[calc(100vh-80px)] flex flex-col items-center">
         <Routes path="/*">
           <Route path="/" element={<h1>Home Page</h1>}/>
-          <Route path="/gallery" element={<h1>Galley</h1>}/>
+          <Route path="/gallery" element={<GalleryPage/>}/>
           <Route path="/booking" element={<h1>Booking</h1>}/>
           <Route path="/about" element={<h1>About Page</h1>}/>
           <Route path="/contact" element={<h1>Contact Page</h1>}/>
           <Route path="/*" element={<h1>404 not found</h1>}/>
         
 
-<<<<<<< HEAD
         </Routes>
       </div>
       
     </div>
   )
-=======
     const navigate = useNavigate();
 
     const images = [
@@ -118,5 +117,4 @@ export default function HomePage() {
 
         </div>
     )
->>>>>>> f9509b52e94c6910ffc595a206ce5673809fb67f
 }
