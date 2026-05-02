@@ -3,12 +3,12 @@ import AdminAlbumPage from "./admin/adminAlbumPage";
 import AddAlbum from "./admin/addAlbum";
 import EditAlbumPage from "./admin/editAlbumPage";
 import { FaImages, FaCalendarCheck, FaUsers, FaStar, FaSignOutAlt } from "react-icons/fa";
+import AdminUserPage from "./admin/adminUserPage";
 
 const navItems = [
   { to: "/admin/albums",   label: "Albums",   icon: <FaImages /> },
   { to: "/admin/bookings", label: "Bookings", icon: <FaCalendarCheck /> },
   { to: "/admin/users",    label: "Users",    icon: <FaUsers /> },
-  { to: "/admin/reviews",  label: "Reviews",  icon: <FaStar /> },
 ];
 
 export default function AdminPage() {
@@ -131,14 +131,6 @@ export default function AdminPage() {
                 {new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}
               </div>
             </div>
-            <div style={{
-              background: "#cee3fe", padding: "7px 16px",
-              borderRadius: "20px", fontSize: "12px",
-              fontWeight: "600", color: "#1a5fa8",
-              border: "1px solid #a8d0f8"
-            }}>
-              ● Live
-            </div>
           </header>
 
           {/* Content */}
@@ -146,8 +138,7 @@ export default function AdminPage() {
             <Routes>
               <Route path="/albums"     element={<AdminAlbumPage />} />
               <Route path="/bookings"   element={<PlaceholderPage title="Bookings" />} />
-              <Route path="/users"      element={<PlaceholderPage title="Users" />} />
-              <Route path="/reviews"    element={<PlaceholderPage title="Reviews" />} />
+              <Route path="/users"      element={<AdminUserPage/>} />
               <Route path="/add-album"  element={<AddAlbum />} />
               <Route path="/edit-album" element={<EditAlbumPage />} />
             </Routes>
