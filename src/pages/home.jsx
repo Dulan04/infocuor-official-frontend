@@ -40,7 +40,12 @@ export default function HomePage(){
 
                 <div className="flex gap-8 text-white items-center">
                     <span className="text-blue-400 border-b-2 border-blue-400 pb-1 cursor-pointer">Home</span>
-                    <span className="cursor-pointer">Gallery</span>
+                    <span 
+                        onClick={() => navigate("/gallery")} 
+                        className="cursor-pointer hover:text-blue-400 transition"
+                    >
+                    Gallery
+                    </span>
                     <span className="cursor-pointer">Booking</span>
                     <span className="cursor-pointer">Contact</span>
                     <span className="cursor-pointer">About</span>
@@ -77,8 +82,11 @@ export default function HomePage(){
                     </p>
 
                     <div className="flex gap-5">
-                        <button className="border border-white px-6 py-3 rounded-full hover:bg-white hover:text-black transition">
-                            Gallery 📷
+                        <button 
+                        onClick={() => navigate("/gallery")}
+                        className="border border-white px-6 py-3 rounded-full hover:bg-white hover:text-black transition"
+                        >
+                        Gallery 📷
                         </button>
 
                         <button className="bg-blue-600 px-6 py-3 rounded-full hover:bg-blue-700 transition">
