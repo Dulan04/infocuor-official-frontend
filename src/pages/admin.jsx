@@ -1,9 +1,10 @@
-import { Link, Route, Routes, useLocation } from "react-router-dom";
+import { Link, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import AdminAlbumPage from "./admin/adminAlbumPage";
 import AddAlbum from "./admin/addAlbum";
 import EditAlbumPage from "./admin/editAlbumPage";
 import { FaImages, FaCalendarCheck, FaUsers, FaStar, FaSignOutAlt } from "react-icons/fa";
 import AdminUserPage from "./admin/adminUserPage";
+import { useAuth } from "../context/AuthContext";
 
 const navItems = [
   { to: "/admin/albums",   label: "Albums",   icon: <FaImages /> },
@@ -14,6 +15,13 @@ const navItems = [
 export default function AdminPage() {
   const location = useLocation();
   const currentNav = navItems.find(n => location.pathname.startsWith(n.to));
+  const { user, logout } = useAuth();
+    const navigate = useNavigate();
+
+  function handleLogout() {
+  logout();
+  navigate("/login");
+}
 
   return (
     <>
@@ -94,25 +102,33 @@ export default function AdminPage() {
           </nav>
 
           {/* User + Logout */}
-          <div style={{ padding: "14px 10px", borderTop: "1px solid #d4e8fc" }}>
+            <div style={{ padding: "14px 10px", borderTop: "1px solid #d4e8fc" }}>
             <div style={{
-              display: "flex", alignItems: "center", gap: "10px",
-              padding: "10px 12px", background: "#cee3fe",
-              borderRadius: "10px", marginBottom: "8px"
+                display: "flex", alignItems: "center", gap: "10px",
+                padding: "10px 12px", background: "#cee3fe",
+                borderRadius: "10px", marginBottom: "8px"
             }}>
-              <div style={{
+                <div style={{
                 width: "34px", height: "34px", borderRadius: "50%",
                 background: "linear-gradient(135deg, #3b82f6, #93c5fd)",
                 display: "flex", alignItems: "center", justifyContent: "center",
                 color: "#fff", fontWeight: "800", fontSize: "13px",
-              }}>A</div>
-              <div>
-                <div style={{ fontSize: "13px", fontWeight: "700", color: "#1a4f8a" }}>Admin</div>
-                <div style={{ fontSize: "11px", color: "#5a8dc0" }}>admin@studio.com</div>
-              </div>
+                }}>
+                {user?.name ? user.name.charAt(0).toUpperCase() : "A"}
+                </div>
+                <div>
+                <div style={{ fontSize: "13px", fontWeight: "700", color: "#1a4f8a" }}>
+                    {user?.name || "Admin"}
+                </div>
+                <div style={{ fontSize: "11px", color: "#5a8dc0" }}>
+                    {user?.email || ""}
+                </div>
+                </div>
             </div>
-            <button className="logout-btn"><FaSignOutAlt /> Logout</button>
-          </div>
+            <button className="logout-btn" onClick={handleLogout}>
+                <FaSignOutAlt /> Logout
+            </button>
+            </div>
         </aside>
 
         {/* Main */}
