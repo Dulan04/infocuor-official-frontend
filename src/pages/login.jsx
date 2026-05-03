@@ -12,24 +12,21 @@ export default function LoginPage() {
   const { login } = useAuth();
 
   async function handleLogin() {
-    try {
-      const response = await axios.post(
-        import.meta.env.VITE_BACKEND_URL + "/api/users/login",
-        { email, password }
-      );
+  try {
+    const response = await axios.post(
+      import.meta.env.VITE_BACKEND_URL + "/api/users/login",
+      { email, password }
+    );
 
-      toast.success("Login Successful");
-      login(response.data.user, response.data.token); // ← saves to context + localStorage
+    toast.success("Login Successful");
+    login(response.data.user, response.data.token);
 
-      if (response.data.user.role === "admin") {
-        navigate("/admin");
-      } else {
-        navigate("/");
-      }
-    } catch (err) {
-      toast.error(err.response.data.message);
-    }
+    navigate("/"); // ← everyone goes to homepage after login
+
+  } catch (err) {
+    toast.error(err.response.data.message);
   }
+}
 
   return (
     <div className="w-full h-screen bg-[url('Login.jpg')] bg-cover bg-center flex flex-row">
